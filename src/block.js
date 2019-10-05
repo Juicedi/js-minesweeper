@@ -29,8 +29,8 @@ const creator = (function blockCreator() {
   Block.prototype.reveal = function reveal() {
     if (this.marked) return;
 
-    this.open = true;
-    this.element.classList.add(`${this.class}--open`);
+    this.opened = true;
+    this.element.classList.add(`${this.class}--opened`);
   };
 
   return Block;
