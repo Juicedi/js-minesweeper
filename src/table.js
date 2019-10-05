@@ -10,7 +10,7 @@ const table = (function creator() {
       const row = document.createElement('tr');
 
       for (let j = 0; j < width; j += 1) {
-        row.appendChild(new Block(this.game).element);
+        row.appendChild(new Block().element);
       }
 
       row.classList.add('minesweeper__row');
