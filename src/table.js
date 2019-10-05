@@ -2,7 +2,7 @@ import Block from './block';
 
 const table = {
   class: 'minesweeper__table',
-  build: function hello(width, height) {
+  build: function buildTable(width, height) {
     const domTable = document.createElement('TABLE');
 
     for (let i = 0; i < height; i += 1) {
