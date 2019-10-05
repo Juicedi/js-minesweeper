@@ -1,0 +1,31 @@
+{
+  "name": "minesweeper",
+  "version": "0.0.1",
+  "description": "Basic minesweeper game for web and testing stuff",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "css-loader": "^3.2.0",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "lite-server": "^2.5.4",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.2"
+  },
+  "scripts": {
+    "start:dev": "webpack-dev-server",
+    "build": "webpack --config webpack.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "minesweeper",
+    "game"
+  ],
+  "author": "Jussi Latvaniemi",
+  "license": "ISC"
+}
