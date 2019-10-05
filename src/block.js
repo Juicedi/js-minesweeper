@@ -26,7 +26,7 @@ const creator = (function blockCreator() {
     }
   };
 
-  Block.prototype.reveal = function reveal() {
+  Block.prototype.open = function open() {
     if (this.marked) return;
 
     this.opened = true;
