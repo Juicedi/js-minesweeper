@@ -4,7 +4,7 @@ const creator = (function blockCreator() {
   function Block() {
     this.element = document.createElement('td');
     this.element.classList.add(this.class);
-    this.element.addEventListener('click', this.reveal.bind(this));
+    this.element.addEventListener('click', this.open.bind(this));
     this.element.addEventListener('contextmenu', this.mark.bind(this));
   }
 
