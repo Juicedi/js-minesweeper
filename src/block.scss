@@ -22,4 +22,11 @@
       cursor: default;
     }
   }
+  &--mined {
+    background-color: red;
+    &:hover {
+      background-color: red;
+      cursor: default;
+    }
+  }
 }

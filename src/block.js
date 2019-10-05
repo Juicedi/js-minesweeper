@@ -1,8 +1,16 @@
 import style from './block.scss'; // eslint-disable-line no-unused-vars
 
-const creator = (function blockCreator() {
+const blockConstructor = function getBlockConstructor(game) {
+  if (!game) {
+    throw new Error('Cannot create block constructor without game parameter');
+  }
+
   function Block() {
     this.element = document.createElement('td');
+    this.isMine = Math.random() > 0.9;
+
+    if (!this.isMine) game.event('empty++');
+
     this.element.classList.add(this.class);
     this.element.addEventListener('click', this.open.bind(this));
     this.element.addEventListener('contextmenu', this.mark.bind(this));
@@ -15,6 +23,7 @@ const creator = (function blockCreator() {
   Block.prototype.mark = function mark(e) {
     e.preventDefault();
 
+    if (game.state === 'ended') return;
     if (this.opened) return;
 
     if (this.marked) {
@@ -28,12 +37,21 @@ const creator = (function blockCreator() {
 
   Block.prototype.open = function open() {
     if (this.marked) return;
+    if (game.state === 'ended') return;
 
     this.opened = true;
+
+    if (this.isMine) {
+      this.element.classList.add(`${this.class}--mined`);
+      game.event('end');
+      return;
+    }
+
     this.element.classList.add(`${this.class}--opened`);
+    game.event('empty');
   };
 
   return Block;
-}());
+};
 
-export default creator;
+export default blockConstructor;
