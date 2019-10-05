@@ -1,4 +1,4 @@
-import item from './block';
+import Block from './block';
 
 const table = {
   class: 'minesweeper__table',
@@ -9,7 +9,7 @@ const table = {
       const row = document.createElement('tr');
 
       for (let j = 0; j < width; j += 1) {
-        row.appendChild(item.build());
+        row.appendChild(new Block().element);
       }
 
       row.classList.add('minesweeper__row');

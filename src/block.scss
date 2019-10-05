@@ -1,11 +1,25 @@
 @import './sass/_variables.scss';
 
 .minesweeper__block {
-  $size: 20px;
+  $mark: #afa;
+  $size: 25px;
   height: $size;
   width: $size;
   background-color: $dark;
   &:hover {
-    background-color: black;
+    background-color: #aba;
+  }
+  &--marked {
+    background-color: $mark;
+    &:hover {
+      background-color: $mark;
+    }
+  }
+  &--open {
+    background-color: $light;
+    &:hover {
+      background-color: $light;
+      cursor: default;
+    }
   }
 }
