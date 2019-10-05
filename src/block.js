@@ -10,12 +10,12 @@ const creator = (function blockCreator() {
 
   Block.prototype.class = 'minesweeper__block';
   Block.prototype.marked = false;
-  Block.prototype.open = false;
+  Block.prototype.opened = false;
 
   Block.prototype.mark = function mark(e) {
     e.preventDefault();
 
-    if (this.open) return;
+    if (this.opened) return;
 
     if (this.marked) {
       this.marked = false;
