@@ -4,7 +4,7 @@ import BlockConstructor from './block';
 
 const element = document.createElement('DIV');
 
-window.game = {
+const game = {
   emptySpaces: 0,
   openedSpaces: 0,
   state: 'running',
