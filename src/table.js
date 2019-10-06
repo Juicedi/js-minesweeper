@@ -14,7 +14,7 @@ class Table {
       domTable.appendChild(row);
     }
 
-    domTable.classList.add(this.class);
+    domTable.classList.add(Table.classString);
     return domTable;
   }
 
