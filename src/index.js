@@ -41,7 +41,7 @@ const row1 = document.createElement('DIV');
 const row2 = document.createElement('DIV');
 const container1 = document.createElement('DIV');
 const container2 = document.createElement('DIV');
-const table1 = new Table(game);
+const table1 = new Table();
 
 element.innerHTML = 'höpön löpön pöppö';
 
