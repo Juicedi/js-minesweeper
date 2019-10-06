@@ -1,13 +1,13 @@
 @import './sass/_variables.scss';
 
 .minesweeper__block {
-  $mark: #afa;
+  $mark: #a88;
   $size: 25px;
   height: $size;
   width: $size;
   background-color: $dark;
   &:hover {
-    background-color: #aba;
+    background-color: #bbb;
   }
   &--marked {
     background-color: $mark;
