@@ -24,7 +24,7 @@ const game = {
 
         break;
       }
-      case 'end': {
+      case 'mine': {
         element.innerHTML = 'you lost';
         this.state = 'ended';
         break;
