@@ -71,7 +71,7 @@ const row2 = document.createElement('DIV');
 const container1 = document.createElement('DIV');
 const container2 = document.createElement('DIV');
 
-element.innerHTML = 'höpön löpön pöppö';
+element.innerHTML = 'Click blocks and try to avoid mines.';
 
 container1.classList.add('content__wrapper');
 container2.classList.add('content__wrapper');
