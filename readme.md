@@ -14,3 +14,7 @@ After installing npm packages, you should be able to start webpack-dev-server
 by calling ```npm run start:dev```
 
 To build the package, call ```npm run build```
+
+## TODOS
+1. Fix issue where opened block would show "1" nearby mine, but actually there
+   is 0 mines nearby.
