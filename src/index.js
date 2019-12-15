@@ -11,12 +11,9 @@ const game = {
   state: 'running',
   nearbyMineCount: function nearbyMineCount(row, index) {
     let mineCount = 0;
-    const startingRow = row !== 0
-      ? row - 1 : row;
-    const endingRow = row + 1 < this.blocks.length
-      ? row + 1 : row;
-    const startingIndex = index !== 0
-      ? index - 1 : index;
+    const startingRow = row !== 0 ? row - 1 : row;
+    const endingRow = row + 1 < this.blocks.length ? row + 1 : row;
+    const startingIndex = index !== 0 ? index - 1 : index;
     const endingIndex = index + 1 < this.blocks[row].length
       ? this.blocks[row].length - 1 : index;
 
