@@ -6,8 +6,8 @@ const element = document.createElement('DIV');
 const table1 = new Table();
 
 const gameState = {
-  end: 0,
-  running: 1,
+  end: false,
+  running: true,
 };
 
 const gameText = {
@@ -37,6 +37,21 @@ const game = {
 
     return mineCount;
   },
+  openSurroundingBlocks: function openSurroundingBlocks(row, column) {
+    const startingRow = row !== 0 ? row - 1 : row;
+    const endingRow = row + 1 < this.blocks.length ? row + 1 : row;
+    const startingColumn = column !== 0 ? column - 1 : column;
+    const endingColumn = column + 1 < this.blocks[row].length
+      ? this.blocks[row].length - 1 : column;
+
+    for (let i = startingRow; i <= endingRow; i += 1) {
+      for (let j = startingColumn; j <= endingColumn; j += 1) {
+        if (i !== row || j !== column) {
+          this.event({ event: 'click', row: i, index: j });
+        }
+      }
+    }
+  },
   event: function handleGameEvent(data) {
     switch (data.event) {
       case 'empty++': {
@@ -59,9 +74,11 @@ const game = {
           return;
         }
 
-        /* TODO: Handle 0 mines nearby
-         *   - should open other 0 mine block if any */
         block.element.innerHTML = this.nearbyMineCount(data.row, data.index);
+
+        if (parseInt(block.element.innerHTML, 10) === 0) {
+          this.openSurroundingBlocks(data.row, data.index);
+        }
 
         if (this.openedSpaces === this.emptySpaces) {
           element.innerHTML = gameText.win;
