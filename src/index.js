@@ -1,6 +1,7 @@
+import index from './index.html'; // eslint-disable-line no-unused-vars
 import style from './index.scss'; // eslint-disable-line no-unused-vars
 import Table from './table';
-import blockGridConstructor from './block';
+import { blockGrid } from './block';
 
 const element = document.createElement('DIV');
 const table1 = new Table();
@@ -27,7 +28,8 @@ const game = {
     const endingRow = row + 1 < this.blocks.length ? row + 1 : row;
     const startingColumn = column !== 0 ? column - 1 : column;
     const endingColumn = column + 1 < this.blocks[row].length
-      ? this.blocks[row].length - 1 : column;
+      ? column + 1
+      : column;
 
     for (let i = startingRow; i <= endingRow; i += 1) {
       for (let j = startingColumn; j <= endingColumn; j += 1) {
@@ -42,7 +44,8 @@ const game = {
     const endingRow = row + 1 < this.blocks.length ? row + 1 : row;
     const startingColumn = column !== 0 ? column - 1 : column;
     const endingColumn = column + 1 < this.blocks[row].length
-      ? this.blocks[row].length - 1 : column;
+      ? column + 1
+      : column;
 
     for (let i = startingRow; i <= endingRow; i += 1) {
       for (let j = startingColumn; j <= endingColumn; j += 1) {
@@ -51,6 +54,20 @@ const game = {
         }
       }
     }
+  },
+  open: function open(paramBlock) {
+    const block = paramBlock;
+
+    if (block.isMarked) return;
+
+    block.isOpened = true;
+
+    if (block.isMine) {
+      block.element.classList.add(`${block.classString}--mined`);
+      return;
+    }
+
+    block.element.classList.add(`${block.classString}--opened`);
   },
   event: function handleGameEvent(data) {
     switch (data.event) {
@@ -65,7 +82,7 @@ const game = {
         if (block.isOpened) return;
         if (block.isMarked) return;
 
-        block.open();
+        this.open(block);
         this.openedSpaces += 1;
 
         if (block.isMine) {
@@ -87,7 +104,20 @@ const game = {
         break;
       }
       case 'contextmenu': {
-        this.blocks[data.row][data.index].mark();
+        // Mark block on right mouse button click
+        const block = this.blocks[data.row][data.index];
+
+        // If block has already been opened, do nothing
+        if (block.isOpened) break;
+
+        if (block.isMarked) {
+          block.isMarked = false;
+          block.element.classList.remove(`${block.classString}--marked`);
+        } else {
+          block.isMarked = true;
+          block.element.classList.add(`${block.classString}--marked`);
+        }
+
         break;
       }
       default: {
@@ -97,7 +127,6 @@ const game = {
   },
 };
 
-const blockGrid = blockGridConstructor(game);
 const row1 = document.createElement('DIV');
 const row2 = document.createElement('DIV');
 const container1 = document.createElement('DIV');
@@ -109,7 +138,7 @@ container1.classList.add('content__wrapper');
 container2.classList.add('content__wrapper');
 
 container1.appendChild(element);
-game.blocks = blockGrid(10, 10);
+game.blocks = blockGrid(10, 10, game);
 container2.appendChild(table1.build(game.blocks));
 
 row1.appendChild(container1);
