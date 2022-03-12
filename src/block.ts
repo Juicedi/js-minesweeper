@@ -1,37 +1,17 @@
-import style from './block.scss'; // eslint-disable-line no-unused-vars
+const blockStyle = require('./block.scss'); // eslint-disable-line no-unused-vars
 
-class Block {
-  constructor() {
-    this.element = document.createElement('td');
-    this.isMine = Math.random() > 0.9;
-    this.classString = 'minesweeper__block';
-  }
+import { Game } from './gameInterface';
+import { Block } from './blockInterface';
+import { IGameEvent } from './gameEventInterface';
 
-  get isOpened() {
-    return this.privOpened ? this.privOpened : false;
-  }
-
-  set isOpened(bool) {
-    this.privOpened = bool;
-  }
-
-  get isMarked() {
-    return this.privMarked ? this.privMarked : false;
-  }
-
-  set isMarked(bool) {
-    this.privMarked = bool;
-  }
-}
-
-function click(game, e) {
-  const block = this;
+function click(game: Game, e: Event) {
+  const { row, index } = this;
   e.preventDefault();
-  if (game.state === 'ended') return;
-  game.event({ event: e.type, row: block.row, index: block.index });
+  // if (game.state === 'ended') return;
+  game.event({ event: e.type, row, index } as IGameEvent);
 }
 
-export function blockGrid(width, height, game) {
+export function blockGrid(width: number, height: number, game: Game): Array<Block>[] {
   if (width <= 0) {
     throw new Error('Width cannot be <= 0');
   }
@@ -50,7 +30,7 @@ export function blockGrid(width, height, game) {
     const row = [];
 
     for (let j = 0; j < width; j += 1) {
-      const block = new Block(game);
+      const block = new Block();
 
       if (!block.isMine) {
         game.event({ event: 'empty++' });

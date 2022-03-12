@@ -1,7 +1,11 @@
-import index from './index.html'; // eslint-disable-line no-unused-vars
-import style from './index.scss'; // eslint-disable-line no-unused-vars
+const html = require('./index.html'); // eslint-disable-line no-unused-vars
+const style = require('./index.scss'); // eslint-disable-line no-unused-vars
+
 import Table from './table';
+import { Game } from './gameInterface';
+import { Block } from './blockInterface';
 import { blockGrid } from './block';
+import { IGameEvent } from './gameEventInterface';
 
 const element = document.createElement('DIV');
 const table1 = new Table();
@@ -17,45 +21,45 @@ const gameText = {
   win: 'You have won the game!',
 };
 
-const game = {
+const game: Game = {
   emptySpaces: 0,
   openedSpaces: 0,
   blocks: [],
   state: gameState.running,
-  nearbyMineCount: function nearbyMineCount(row, column) {
-    let mineCount = 0;
-    const startingRow = row !== 0 ? row - 1 : row;
-    const endingRow = row + 1 < this.blocks.length ? row + 1 : row;
-    const startingColumn = column !== 0 ? column - 1 : column;
-    const endingColumn = column + 1 < this.blocks[row].length
+  nearbyMineCount: function nearbyMineCount(row: number, column: number): number {
+    let mineCount: number = 0;
+    const startingRow: number = row !== 0 ? row - 1 : row;
+    const endingRow: number = row + 1 < this.blocks.length ? row + 1 : row;
+    const startingColumn: number = column !== 0 ? column - 1 : column;
+    const endingColumn: number = column + 1 < this.blocks[row].length
       ? column + 1
       : column;
 
-    for (let i = startingRow; i <= endingRow; i += 1) {
-      for (let j = startingColumn; j <= endingColumn; j += 1) {
+    for (let i: number = startingRow; i <= endingRow; i += 1) {
+      for (let j: number = startingColumn; j <= endingColumn; j += 1) {
         mineCount += this.blocks[i][j].isMine;
       }
     }
 
     return mineCount;
   },
-  openSurroundingBlocks: function openSurroundingBlocks(row, column) {
-    const startingRow = row !== 0 ? row - 1 : row;
-    const endingRow = row + 1 < this.blocks.length ? row + 1 : row;
-    const startingColumn = column !== 0 ? column - 1 : column;
-    const endingColumn = column + 1 < this.blocks[row].length
+  openSurroundingBlocks: function openSurroundingBlocks(row: number, column: number) {
+    const startingRow: number = row !== 0 ? row - 1 : row;
+    const endingRow: number = row + 1 < this.blocks.length ? row + 1 : row;
+    const startingColumn: number = column !== 0 ? column - 1 : column;
+    const endingColumn: number = column + 1 < this.blocks[row].length
       ? column + 1
       : column;
 
-    for (let i = startingRow; i <= endingRow; i += 1) {
-      for (let j = startingColumn; j <= endingColumn; j += 1) {
+    for (let i: number = startingRow; i <= endingRow; i += 1) {
+      for (let j: number = startingColumn; j <= endingColumn; j += 1) {
         if (i !== row || j !== column) {
           this.event({ event: 'click', row: i, index: j });
         }
       }
     }
   },
-  open: function open(paramBlock) {
+  open: function open(paramBlock: Block): void {
     const block = paramBlock;
 
     if (block.isMarked) return;
@@ -69,7 +73,7 @@ const game = {
 
     block.element.classList.add(`${block.classString}--opened`);
   },
-  event: function handleGameEvent(data) {
+  event: function handleGameEvent(data: IGameEvent) {
     switch (data.event) {
       case 'empty++': {
         this.emptySpaces += 1;
@@ -146,3 +150,5 @@ row2.appendChild(container2);
 
 document.body.appendChild(row1);
 document.body.appendChild(row2);
+
+console.log('test');
