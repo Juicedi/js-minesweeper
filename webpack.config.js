@@ -5,7 +5,7 @@ module.exports = {
   mode: 'development',
   entry: './src/index.js',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    static: path.join(__dirname, 'dist'),
     compress: true,
     port: 8080,
   },

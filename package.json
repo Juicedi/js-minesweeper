@@ -3,20 +3,6 @@
   "version": "0.0.1",
   "description": "Basic minesweeper game for web and testing stuff",
   "private": true,
-  "dependencies": {},
-  "devDependencies": {
-    "css-loader": "^3.2.0",
-    "eslint": "^6.5.1",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.18.2",
-    "file-loader": "^6.0.0",
-    "node-sass": "^4.13.1",
-    "sass-loader": "^8.0.0",
-    "style-loader": "^1.0.0",
-    "webpack": "^4.41.0",
-    "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.8.2"
-  },
   "scripts": {
     "start:dev": "webpack-dev-server",
     "build": "webpack --config webpack.config.js",
@@ -27,5 +13,18 @@
     "game"
   ],
   "author": "Jussi Latvaniemi",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^6.7.1",
+    "eslint": "^8.11.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4",
+    "file-loader": "^6.2.0",
+    "node-sass": "^7.0.1",
+    "sass-loader": "^12.6.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
 }
